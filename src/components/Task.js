@@ -3,7 +3,7 @@ import React from "react";
 import { FaTimes } from "react-icons/fa";
 
 
-export default function Task({ id, completed, job, date, time, toggle, onDelete }) {
+export default function Task({ id, reminder, job, date, time, toggle, onDelete }) {
     const taskStyle = {
         display: "flex",
         marginBottom: "1em",
@@ -12,7 +12,7 @@ export default function Task({ id, completed, job, date, time, toggle, onDelete 
         background: "#d0a3a3",
         paddingTop: ".25em",
         alignItems: "center",
-        paddingLeft: completed ? "0" : ".5em",
+        paddingLeft: reminder ? "0" : ".5em",
         justifyContent: "space-between"
 
     }
@@ -20,15 +20,15 @@ export default function Task({ id, completed, job, date, time, toggle, onDelete 
 
 
     return <div style={taskStyle} className="task"
-        // onClick={() => toggle(id)}
+    // onClick={() => toggle(id)}
     >
-        {completed && <div style={{
+        {reminder && <div style={{
             height: "4em",
             width: "1.5%",
             background: "green",
             borderRadius: "8px",
 
-        }} className="completed"></div>}
+        }} className=" reminder"></div>}
         <div className="details">
             <h3>{job}</h3>
             <p>{`${date} at ${time}`}</p>

@@ -7,21 +7,21 @@ const tasks = [
         job: "Doctor's Appointment",
         date: "Feb 5th",
         time: "2:30pm",
-        completed: true
+        reminder: false
     },
     {
         id: 1,
         job: "Meeting at School",
         date: "Feb 6th",
         time: "1:30pm",
-        completed: false
+        reminder: true
     },
     {
         id: 2,
         job: "Dinner with Mom",
         date: "Feb 8th",
         time: "7:00pm",
-        completed: true
+        reminder: false
     },
 ]
 export default function Tasks() {
@@ -30,7 +30,7 @@ export default function Tasks() {
 
     function toggle(id) {
         setTaskData(taskData.map(task => task.id === id ? {
-            ...task, completed: !task.completed
+            ...task, reminder: !task.reminder
         } : task))
 
     }
