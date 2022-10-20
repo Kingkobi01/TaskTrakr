@@ -1,3 +1,5 @@
+import Task from "./components/Task"
+import { useState } from "react"
 const tasks = [
     {
     id: 0,
@@ -22,4 +24,40 @@ const tasks = [
     },
 ]
 
-export default tasks
+export default function Tasks() {
+    
+    const [taskData, setTaskData] = useState(tasks)
+
+    function toggle(id) {
+        setTaskData(taskData.map(task => task.id === id ? {
+            ...task, completed: !task.completed
+        } : task))
+
+    }
+
+
+
+    function deleteTask(id) {
+        console.log("deleting...", id);
+        setTaskData(tasks.filter(task => task.id !== id))
+
+    }
+
+
+    return <div className="tasks" style={{
+        maxHeight: "300px",
+        overflowY: "auto"
+    }}>
+
+        {tasks.map((task) => {
+            return <Task
+
+                key={task.job + task.id}
+                {...task}
+                toggle={toggle}
+                onDelete={deleteTask}
+            />
+        })}
+
+    </div>
+}
