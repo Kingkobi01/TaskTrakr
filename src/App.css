@@ -62,42 +62,32 @@ form button:hover {
   font-size: 1.5rem;
 }
 
-
-/* .App {
-  text-align: center;
+.reminder {
+  animation: fadeIn 1s;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.reminder-checkbox>input[type="checkbox"] +.custom-checkbox::after {
+  content: "\2714";
+  transform: scale(0);
+  transition: transform 180ms ease-in-out;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+
+.reminder-checkbox>input[type="checkbox"]:checked+.custom-checkbox::after {
+  transform: scale(1);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
+
+
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
   }
+
   to {
-    transform: rotate(360deg);
+    opacity: 1;
   }
-} */
+}

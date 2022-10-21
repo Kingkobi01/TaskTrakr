@@ -1,63 +1,73 @@
 import Task from "./components/Task"
-import { useState } from "react"
 
-const tasks = [
-    {
-        id: 0,
-        job: "Doctor's Appointment",
-        date: "Feb 5th",
-        time: "2:30pm",
-        reminder: false
-    },
-    {
-        id: 1,
-        job: "Meeting at School",
-        date: "Feb 6th",
-        time: "1:30pm",
-        reminder: true
-    },
-    {
-        id: 2,
-        job: "Dinner with Mom",
-        date: "Feb 8th",
-        time: "7:00pm",
-        reminder: false
-    },
-]
-export default function Tasks() {
 
-    const [taskData, setTaskData] = useState(tasks)
+export default function Tasks({ tasks, setTaskData }) {
 
-    function toggle(id) {
-        setTaskData(taskData.map(task => task.id === id ? {
-            ...task, reminder: !task.reminder
-        } : task))
+  
+
+
+    async function toggle(id) {
+        const taskToToggle = await tasks.find(task => task.id === id)
+        
+        const toggledTask = {
+            ...taskToToggle, reminder: !taskToToggle.reminder
+        }
+        
+        
+        const res = await fetch(`http://localhost:7000/tasks/${id}`, {
+            method: "PUT",
+            headers: {                
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(toggledTask)
+        })
+
+        const updatedTask = await res.json()
+
+            setTaskData(tasks.map(task => task.id === id ? {
+                ...task, reminder: updatedTask.reminder
+            } : task))
+        
 
     }
 
 
 
-    function deleteTask(id) {
-        console.log("deleting...", id);
+    const deleteTask = async (id) => {
+        await fetch(`http://localhost:7000/tasks/${id}`, {
+            method: "DELETE"
+        })
+
+
         setTaskData(tasks.filter(task => task.id !== id))
 
     }
 
 
-    return <div className="tasks" style={{
-        maxHeight: "300px",
-        overflowY: "auto"
-    }}>
+    return (
+        <div className="tasks"
+            style={{
+                maxHeight: "300px",
+                overflowY: "auto"
+            }}>
+            {
+                tasks.length === 0 ?
+                    <p style={{
+                        textAlign: "center",
+                        margin: ".5em auto"
+                    }}>
+                        There are no tasks for you today
+                    </p>
+                    :
+                    tasks.map((task) => {
+                        return <Task
+                            key={task.job + task.id}
+                            {...task}
+                            toggle={toggle}
+                            deleteTask={deleteTask}
 
-        {tasks.map((task) => {
-            return <Task
+                        />
+                    })}
 
-                key={task.job + task.id}
-                {...task}
-                toggle={toggle}
-                onDelete={deleteTask}
-            />
-        })}
-
-    </div>
+        </div>)
 }

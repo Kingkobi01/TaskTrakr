@@ -1,0 +1,46 @@
+{
+  "tasks": [
+    {
+      "id": 0,
+      "job": "Doctor's Appointment",
+      "date": "Feb 5th",
+      "time": "2:30pm",
+      "reminder": false
+    },
+    {
+      "id": 1,
+      "job": "Meeting at School",
+      "date": "Feb 6th",
+      "time": "1:30pm",
+      "reminder": false
+    },
+    {
+      "id": 2,
+      "job": "Dinner with Mom",
+      "date": "Feb 8th",
+      "time": "7:00pm",
+      "reminder": false
+    },
+    {
+      "id": 3,
+      "job": "Testing",
+      "date": "21st October",
+      "time": "7:45pm",
+      "reminder": true
+    },
+    {
+      "id": 4,
+      "job": "Do Homework",
+      "date": "21st October",
+      "time": "7:45pm",
+      "reminder": false
+    },
+    {
+      "id": 5,
+      "job": "Kofi Mensah",
+      "date": "21st October",
+      "time": "7:45pm",
+      "reminder": true
+    }
+  ]
+}
